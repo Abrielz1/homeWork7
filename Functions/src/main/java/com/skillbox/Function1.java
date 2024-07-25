@@ -7,8 +7,8 @@ public interface Function1<T, R> {
 
     R apply(T inputData);
 
-    default <V> Function1<V, R> compose(Function1<V, T> input) {
+    default <V> Function1<T, V> compose(Function1<? super R, ? extends V> input) {
         Objects.requireNonNull(input);
-        return (V v) -> apply(input.apply(v));
+        return (v) -> input.apply(this.apply(v));
     }
 }
