@@ -51,7 +51,7 @@ public class Collections {
         return result;
     }
 
-    public static <T, V, R> List<T> takeUnless(BiFunction<T, V, R> BiFunctionB, T[] a) {
+    public static <T, V, R> List<T> takeUnless(BiFunction<T, V, R> BiFunctionB, T t, T[] a) {
 
         List<T> result = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class Collections {
         return result;
     }
 
-    public static <T, V, R> List<T> foldr(BiFunction<T, V, R> BiFunctionB, T[] a) { // todo: foldr / foldl — принимает функцию двух аргументов, начальное значение и коллекцию, работает так.
+    public static <T, V, R> List<T> foldr(BiFunction<T, V, R> BiFunctionB, T t, T[] a) { // todo: foldr / foldl — принимает функцию двух аргументов, начальное значение и коллекцию, работает так.
 
         List<T> result = new ArrayList<>();
 
