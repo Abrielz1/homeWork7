@@ -4,6 +4,7 @@ import com.skillbox.BiFunction;
 import com.skillbox.Function1;
 import com.skillbox.Predicate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Collections {
@@ -59,18 +60,19 @@ public class Collections {
         return result;
     }
 
-    public static <T, V, R> List<T> foldr(BiFunction<T, V, R> BiFunctionB, T t, T[] a) { // todo: foldr / foldl — принимает функцию двух аргументов, начальное значение и коллекцию, работает так.
+    public static <T, U, R> R foldr(BiFunction<T, U, R> f2, T start, Collection<T> collectionElements) {
+        for (T e : collectionElements) {
+           return f2.apply(start, (U) f2.bind0(e));
+        }
 
-        List<T> result = new ArrayList<>();
-
-        return result;
+        return null;
     }
 
-    public static <T> List<T> foldl(Predicate<T> predicateP, T[] a) { // todo: foldr / foldl — принимает функцию двух аргументов, начальное значение и коллекцию, работает так.
+    public static <T, U, R> R foldl(BiFunction<T, U, R> f2, T start, Collection<T> collectionElements) {
+        for (T e : collectionElements) {
+            return f2.apply(start, (U) f2.bind1((U) e));
+        }
 
-        List<T> result = new ArrayList<>();
-
-
-        return result;
+        return null;
     }
 }
