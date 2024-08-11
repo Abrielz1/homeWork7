@@ -6,6 +6,7 @@ import com.skillbox.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class Collections {
 
@@ -52,27 +53,38 @@ public class Collections {
         return result;
     }
 
-    public static <T, V, R> List<T> takeUnless(BiFunction<T, V, R> BiFunctionB, T t, T[] a) {
+    public static <T> List<T> takeUnless(Predicate<T> predicateP, T t, T[] a) {
 
         List<T> result = new ArrayList<>();
 
+        for (T iter : a) {
+
+            if (!predicateP.test(iter)) {
+                result.add(iter);
+            } else {
+                return result;
+            }
+        }
 
         return result;
     }
 
-    public static <T, U, R> R foldr(BiFunction<T, U, R> f2, T start, Collection<T> collectionElements) {
-        for (T e : collectionElements) {
-           return f2.apply(start, (U) f2.bind0(e));
+    @SuppressWarnings("unchecked")
+    public static <T, U, R> R foldl(BiFunction<T, U, R> biFunctionB, T start, Collection<T> collectionElements) {
+
+        for (Object e : collectionElements) {
+             start = (T) biFunctionB.apply(start, (U) e);
         }
 
-        return null;
+        return (R) start;
     }
 
-    public static <T, U, R> R foldl(BiFunction<T, U, R> f2, T start, Collection<T> collectionElements) {
-        for (T e : collectionElements) {
-            return f2.apply(start, (U) f2.bind1((U) e));
-        }
+    @SuppressWarnings("unchecked")
+    public static <T, U, R> R foldr(BiFunction<T, U, R> biFunctionB, T start, Collection<T> collectionElements) {
 
-        return null;
+        List<T> list = new ArrayList<>(collectionElements);
+        java.util.Collections.reverse(list);
+
+        return foldl(biFunctionB, start, list);
     }
 }
