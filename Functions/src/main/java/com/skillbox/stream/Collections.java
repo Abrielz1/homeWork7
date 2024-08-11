@@ -79,7 +79,6 @@ public class Collections {
         return (R) start;
     }
 
-    @SuppressWarnings("unchecked")
     public static <T, U, R> R foldr(BiFunction<T, U, R> biFunctionB, T start, Collection<T> collectionElements) {
 
         List<T> list = new ArrayList<>(collectionElements);
